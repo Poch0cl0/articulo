@@ -1,0 +1,157 @@
+Metadata-Version: 2.4
+Name: typst
+Version: 0.15.0
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+License-File: LICENSE
+Summary: Python binding to Typst, a new markup-based typesetting system that is powerful and easy to learn.
+License-Expression: Apache-2.0
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Documentation, https://github.com/messense/typst-py/blob/main/README.md
+Project-URL: Homepage, https://github.com/messense/typst-py/
+Project-URL: Readme, https://github.com/messense/typst-py/blob/main/README.md
+Project-URL: Repository, https://github.com/messense/typst-py
+
+# typst-py
+
+![CI](https://github.com/messense/typst-py/workflows/CI/badge.svg)
+[![PyPI](https://img.shields.io/pypi/v/typst.svg)](https://pypi.org/project/typst)
+[![Documentation Status](https://readthedocs.org/projects/typst-py/badge/?version=latest)](https://typst-py.readthedocs.io/en/latest/?badge=latest)
+
+Python binding to [typst](https://github.com/typst/typst),
+a new markup-based typesetting system that is powerful and easy to learn.
+
+## Installation
+
+```bash
+pip install typst
+```
+
+## Usage
+
+```python
+import datetime
+import typst
+
+
+# Compile `hello.typ` to PDF and save as `hello.pdf`
+typst.compile("hello.typ", output="hello.pdf")
+
+# Compile `hello.typ` to PNG and save as `hello.png`
+typst.compile("hello.typ", output="hello.png", format="png", ppi=144.0)
+
+# Or pass `hello.typ` content as bytes
+with open("hello.typ", "rb") as f:
+    typst.compile(f.read(), output="hello.pdf")
+
+# Or return PDF content as bytes
+pdf_bytes = typst.compile("hello.typ")
+
+# Use a fixed creation timestamp for reproducible PDFs
+timestamp = datetime.datetime.fromtimestamp(0, datetime.timezone.utc)
+pdf_bytes = typst.compile("hello.typ", timestamp=timestamp)
+
+# Also for svg
+svg_bytes = typst.compile("hello.typ", format="svg")
+
+# Typst 0.15 minifies PDF, SVG, and HTML by default; pass pretty=True for
+# human-readable export output.
+svg_bytes = typst.compile("hello.typ", format="svg", pretty=True)
+
+# Multiple compatible PDF standards can be requested at once.
+pdf_bytes = typst.compile("hello.typ", pdf_standards=["a-2a", "ua-1"])
+
+# For multi-page export (the template is the same as the typst cli)
+images = typst.compile("hello.typ", output="hello{n}.png", format="png")
+
+# Or use Compiler class to avoid reinitialization
+compiler = typst.Compiler()
+compiler.compile(input="hello.typ", format="png", ppi=144.0)
+
+# Query something
+import json
+
+values = json.loads(typst.query("hello.typ", "<note>", field="value", one=True))
+
+# Or use Typst's newer eval-style query expression
+values = json.loads(typst.eval("hello.typ", "query(<note>).first().value"))
+```
+
+## Multi-file projects
+
+You can compile multi-file Typst projects by passing a dictionary mapping filenames to
+their content as bytes. The entry point must be keyed as `"main"` or `"main.typ"` (if
+there is only one file, any key works):
+
+```python
+import typst
+
+files = {
+    "main.typ": b'#import "lib.typ": greet\n= Hello\n#greet("World")',
+    "lib.typ": b'#let greet(name) = [Hello, #name!]',
+}
+
+pdf = typst.compile(files, format="pdf")
+```
+
+This is useful when Typst sources are bundled as Python package resources:
+
+```python
+import typst
+import importlib.resources
+
+files = {}
+for filename in ["main.typ", "lib.typ", "utils.typ"]:
+    files[filename] = importlib.resources.read_binary("mypackage.typst_files", filename)
+
+pdf = typst.compile(files, format="pdf")
+```
+
+Dictionary values can also be file paths (as strings or `Path` objects), which will be
+read from disk.
+
+## Packages
+
+Use `package_path` to point Typst at a local package directory and
+`package_cache_path` to control where downloaded `@preview` packages are cached:
+
+```python
+import typst
+
+pdf = typst.compile(
+    "main.typ",
+    package_path="vendor",
+    package_cache_path="vendor",
+)
+```
+
+## Passing values
+
+You can pass values to the compiled Typst file with the `sys_inputs` argument. For example:
+
+```python
+import json
+import typst
+
+persons = [{"name": "John", "age": 35}, {"name": "Xoliswa", "age": 45}]
+sys_inputs = {"persons": json.dumps(persons)}
+
+typst.compile(input="main.typ", output="ages.pdf", sys_inputs=sys_inputs)
+```
+
+The following example shows how the passed data can be used in a Typst file.
+
+```
+#let persons = json(bytes(sys.inputs.persons))
+
+#for person in persons [
+  #person.name is #person.age years old. \
+]
+```
+
+## License
+
+This work is released under the Apache-2.0 license. A copy of the license is provided in the [LICENSE](./LICENSE) file.
+

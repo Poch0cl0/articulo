@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Demostración ficticia de ocho llegadas",
+  "kind": "synthetic",
+  "work_unit": "basal_minutes",
+  "patients": [
+    {"id": 0, "arrival": 0, "priority": 2, "service": 15, "ventilation": false},
+    {"id": 1, "arrival": 2, "priority": 0, "service": 60, "ventilation": true},
+    {"id": 2, "arrival": 5, "priority": 1, "service": 30, "ventilation": false},
+    {"id": 3, "arrival": 8, "priority": 0, "service": 45, "ventilation": false},
+    {"id": 4, "arrival": 12, "priority": 2, "service": 20, "ventilation": false},
+    {"id": 5, "arrival": 16, "priority": 1, "service": 35, "ventilation": false},
+    {"id": 6, "arrival": 20, "priority": 0, "service": 75, "ventilation": true},
+    {"id": 7, "arrival": 25, "priority": 2, "service": 10, "ventilation": false}
+  ]
+}

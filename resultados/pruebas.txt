@@ -1,0 +1,20 @@
+test_analytic_single (test_model.EngineTests.test_analytic_single) ... ok
+test_empty (test_model.EngineTests.test_empty) ... ok
+test_feedback (test_model.EngineTests.test_feedback) ... ok
+test_high_load_conservation (test_model.EngineTests.test_high_load_conservation) ... ok
+test_horizon_censoring (test_model.EngineTests.test_horizon_censoring) ... ok
+test_invalid_parameters (test_model.EngineTests.test_invalid_parameters) ... ok
+test_no_ventilator (test_model.EngineTests.test_no_ventilator) ... ok
+test_priority (test_model.EngineTests.test_priority) ... ok
+test_reproducible (test_model.EngineTests.test_reproducible) ... ok
+test_reservation_release (test_model.EngineTests.test_reservation_release) ... ok
+test_sync_atomic_rejection (test_model.EngineTests.test_sync_atomic_rejection) ... ok
+test_sync_copy (test_model.EngineTests.test_sync_copy) ... ok
+test_sync_duplicate_and_stale (test_model.EngineTests.test_sync_duplicate_and_stale) ... ok
+test_zero_beds (test_model.EngineTests.test_zero_beds) ... ok
+test_zero_staff (test_model.EngineTests.test_zero_staff) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.075s
+
+OK

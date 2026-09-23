@@ -1,0 +1,4 @@
+datos/gemelo/*.sqlite3
+datos/gemelo/*.sqlite3-shm
+datos/gemelo/*.sqlite3-wal
+datos/gemelo/*.bak

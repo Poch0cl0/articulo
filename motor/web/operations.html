@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Centro de operación hospitalaria ABS–SD"><title>ABS–SD · Centro de operación</title><link rel="stylesheet" href="/operations.css"><script src="/operations.js" defer></script></head>
+<body>
+<aside class="sidebar" aria-label="Navegación principal">
+<a class="brand" href="/operations"><span class="brand-mark">✚</span><span>ABS–SD<small>HOSPITAL DIGITAL</small></span></a>
+<div class="workspace-label">ESPACIO DE TRABAJO</div>
+<div class="hospital-identity"><span class="hospital-avatar">H</span><div><strong id="hospital-name">Hospital local</strong><small>Centro de operación</small></div></div>
+<div class="nav-caption">GESTIÓN HOSPITALARIA</div><nav id="entity-tabs" aria-label="Módulos operativos"></nav>
+<div class="nav-caption">INTELIGENCIA Y MODELO</div>
+<a class="nav-link" href="/simulation"><span aria-hidden="true">◇</span>Simulación y gemelo 3D<span class="arrow">→</span></a>
+<button class="nav-link" type="button" id="hospital-settings"><span aria-hidden="true">⚙</span>Configuración del hospital</button>
+<div class="sidebar-foot"><span class="status-dot"></span><div><strong>Entorno local</strong><small>Sin fuente HIS conectada</small></div></div>
+</aside>
+<div class="app-content">
+<header class="topbar"><div class="breadcrumb">Hospital digital <span>/</span> <strong id="breadcrumb-module">Áreas</strong></div><div class="topbar-meta"><span class="local-pill">● Registro local</span><span class="avatar" aria-label="Sesión local">HL</span></div></header>
+<main>
+<div class="page-heading"><div><div class="eyebrow">CENTRO DE OPERACIÓN</div><h1 id="module-title">Áreas del hospital</h1><p id="module-description">Organiza los espacios donde ocurre la atención.</p></div><button id="new-record" type="button"><span aria-hidden="true">＋</span> Nuevo registro</button></div>
+<section class="metrics" id="ops-summary" aria-label="Resumen del hospital"></section>
+<div id="ops-error" class="error-box" role="alert" hidden></div>
+<section class="data-panel" aria-label="Registros del módulo">
+<div class="panel-heading"><div><h2 id="list-title">Directorio de áreas</h2><span id="record-count" class="count-caption">Cargando registros…</span></div><button id="refresh" class="icon-button" type="button" aria-label="Actualizar registros">↻</button></div>
+<div class="table-toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar por código, nombre o estado…" aria-label="Buscar registros"></label><label class="archive-toggle"><input type="checkbox" id="show-archived"> Incluir archivados</label></div>
+<div class="table-wrap"><table><thead id="record-head"></thead><tbody id="record-body"></tbody></table></div>
+<div class="pagination"><span id="page-info"></span><div><button type="button" class="secondary" id="prev-page">← Anterior</button><button type="button" class="secondary" id="next-page">Siguiente →</button></div></div>
+</section>
+<div class="context-note"><span aria-hidden="true">◎</span><p><strong>Una base para tu gemelo digital.</strong> Gestiona los registros operativos aquí y explora escenarios en el motor. La conexión entre ambos estados está pendiente.</p><a href="/simulation">Abrir simulador →</a></div>
+<footer><span>ABS–SD · Gestión hospitalaria</span><span>Usa códigos seudónimos para personal y episodios.</span></footer>
+</main></div>
+<dialog id="record-dialog" class="drawer" aria-labelledby="form-title">
+<div class="drawer-heading"><div><div class="eyebrow">GESTIÓN DE REGISTROS</div><h2 id="form-title">Nuevo registro</h2></div><button type="button" class="icon-button" id="cancel-edit" aria-label="Cerrar formulario">×</button></div>
+<form id="record-form"><p class="form-intro">Completa la información del registro. Los campos con * son obligatorios.</p><div id="form-error" class="error-box" role="alert" hidden></div><div id="record-fields"></div><div class="drawer-actions"><button type="button" class="secondary" id="discard-edit">Cancelar</button><button id="save-record" type="submit">Crear registro</button></div></form>
+</dialog>
+<dialog id="hospital-dialog" class="settings-dialog" aria-labelledby="hospital-title"><div class="drawer-heading"><div><div class="eyebrow">CONFIGURACIÓN</div><h2 id="hospital-title">Tu hospital</h2></div><button type="button" class="icon-button" id="close-hospital" aria-label="Cerrar configuración">×</button></div><form id="hospital-form"><div id="hospital-error" class="error-box" role="alert" hidden></div><label>Código del hospital *<input name="code" required maxlength="100"></label><label>Nombre del hospital *<input name="name" required maxlength="100"></label><label>Zona horaria IANA *<input name="timezone" required placeholder="America/Lima"></label><p class="field-hint">Las fechas de los formularios se muestran en la hora de este dispositivo.</p><div class="drawer-actions"><button type="submit">Guardar configuración</button></div></form></dialog>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+</body></html>

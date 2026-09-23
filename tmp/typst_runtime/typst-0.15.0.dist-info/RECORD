@@ -1,0 +1,12 @@
+typst-0.15.0.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+typst-0.15.0.dist-info/METADATA,sha256=rkit_ZG5CTEqV7LW6CWYX4Tm4w-t2CJUbsISI-eugs4,4819
+typst-0.15.0.dist-info/RECORD,,
+typst-0.15.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+typst-0.15.0.dist-info/WHEEL,sha256=pFIXPOkq6jL2LlDfuKG9tv96ZyWzqxYbGCGPlqgMguc,95
+typst-0.15.0.dist-info/licenses/LICENSE,sha256=IP57AOkE7WkOO5_WBzeE0_xCgUHb0QuBwB_RQ9B5f1g,9899
+typst-0.15.0.dist-info/sboms/typst-py.cyclonedx.json,sha256=J80XK63RfEvWScs4qKQXUQdkedtkuAOLNE3gw_nO6uo,380138
+typst/__init__.py,sha256=PH-FFHcL7oAQGXqPEco6YVCB_BF0BKSflQlEceo1Voo,79
+typst/__init__.pyi,sha256=M5owp4QRnCv8hJ4WBzRAIal_eTdnvj5vOSVurh7_e-Y,18089
+typst/__pycache__/__init__.cpython-312.pyc,,
+typst/_typst.pyd,sha256=L7ZptIX4hjrXObeOy3BPtZROCCLoPIo_QOkm_vH171c,62065152
+typst/py.typed,sha256=frcCV1k9oG9oKj3dpUqdJg1PxRT2RSN_XKdLCPjaYaY,2

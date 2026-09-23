@@ -1,0 +1,486 @@
+{
+  "source": {
+    "name": "CDC/NCHS NHAMCS 2022",
+    "url": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NHAMCS/stata/ed2022-stata.zip",
+    "documentation": "https://www.cdc.gov/nchs/nhamcs/documentation/index.html",
+    "sha256": "aa32e635ef9564b1c8e03cea16c87ec2ed02e9a928d22a257df18100a38ad683",
+    "records": 16025
+  },
+  "trained_utc": "2026-09-23T06:15:46.746122+00:00",
+  "seed": 20260923,
+  "versions": {
+    "python": "3.13.9",
+    "sklearn": "1.8.0",
+    "pandas": "3.0.3",
+    "numpy": "2.4.4",
+    "joblib": "1.5.3"
+  },
+  "features": [
+    "age",
+    "sex",
+    "triage",
+    "temperature_c",
+    "pulse",
+    "respiration",
+    "systolic",
+    "diastolic",
+    "pain",
+    "ambulance",
+    "arrival_hour"
+  ],
+  "feature_missing_fraction": {
+    "age": 0.0,
+    "sex": 0.0,
+    "triage": 0.3630577223088924,
+    "temperature_c": 0.05847113884555382,
+    "pulse": 0.06570982839313573,
+    "respiration": 0.05341653666146646,
+    "systolic": 0.10745709828393135,
+    "diastolic": 0.10945397815912636,
+    "pain": 0.4402496099843994,
+    "ambulance": 0.030889235569422777,
+    "arrival_hour": 0.01516380655226209
+  },
+  "split": {
+    "train": {
+      "records": 9196,
+      "hospitals": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        13,
+        14,
+        16,
+        17,
+        20,
+        21,
+        22,
+        26,
+        27,
+        30,
+        31,
+        33,
+        35,
+        36,
+        37,
+        38,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46,
+        48,
+        51,
+        53,
+        54,
+        58,
+        59,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        71,
+        73,
+        74,
+        75,
+        77,
+        78,
+        81,
+        82,
+        83,
+        84,
+        86,
+        88,
+        89,
+        90,
+        91,
+        92,
+        96,
+        97,
+        101,
+        103,
+        104,
+        106,
+        107,
+        108,
+        110,
+        111,
+        112,
+        113,
+        116,
+        117,
+        119,
+        120,
+        121,
+        122,
+        126,
+        127,
+        128,
+        129,
+        130,
+        133,
+        134,
+        136,
+        137,
+        141,
+        142,
+        143,
+        145,
+        146,
+        147,
+        149,
+        150,
+        154,
+        157,
+        159,
+        160,
+        163,
+        164,
+        165,
+        168,
+        169,
+        170,
+        171,
+        173,
+        175,
+        177,
+        180,
+        183,
+        184,
+        185
+      ]
+    },
+    "validation": {
+      "records": 3409,
+      "hospitals": [
+        11,
+        18,
+        19,
+        25,
+        29,
+        32,
+        47,
+        49,
+        55,
+        56,
+        61,
+        69,
+        70,
+        72,
+        76,
+        79,
+        87,
+        94,
+        98,
+        115,
+        123,
+        124,
+        125,
+        135,
+        139,
+        144,
+        148,
+        151,
+        152,
+        153,
+        156,
+        161,
+        172,
+        174,
+        178,
+        179,
+        182,
+        186
+      ]
+    },
+    "test": {
+      "records": 3420,
+      "hospitals": [
+        9,
+        10,
+        15,
+        23,
+        24,
+        28,
+        34,
+        39,
+        41,
+        50,
+        52,
+        57,
+        60,
+        68,
+        80,
+        85,
+        93,
+        95,
+        99,
+        100,
+        102,
+        105,
+        109,
+        114,
+        118,
+        131,
+        132,
+        138,
+        140,
+        155,
+        158,
+        162,
+        166,
+        167,
+        176,
+        181,
+        187,
+        188
+      ]
+    }
+  },
+  "targets": {
+    "visit_minutes": {
+      "label": "LOV",
+      "selected": "gradient_boosting_7_leaves",
+      "eligible": 15328,
+      "excluded": 697,
+      "counts": {
+        "train": 8781,
+        "validation": 3251,
+        "test": 3296
+      },
+      "validation": {
+        "baseline_weighted_median": {
+          "mae_minutes": 186.29115769816963,
+          "rmse_minutes": 458.9107935735188,
+          "mae_unweighted_minutes": 177.75545985850508
+        },
+        "gradient_boosting_7_leaves": {
+          "mae_minutes": 177.0346626295901,
+          "rmse_minutes": 447.5428035927367,
+          "mae_unweighted_minutes": 168.9507916742733
+        },
+        "gradient_boosting_15_leaves": {
+          "mae_minutes": 178.02934188944988,
+          "rmse_minutes": 448.07568377189824,
+          "mae_unweighted_minutes": 169.63775750967045
+        }
+      },
+      "test_selected": {
+        "mae_minutes": 153.00567177701492,
+        "rmse_minutes": 345.02313808307474,
+        "mae_unweighted_minutes": 178.7308039992578
+      },
+      "test_baseline": {
+        "mae_minutes": 164.34442834350028,
+        "rmse_minutes": 357.8793282225345,
+        "mae_unweighted_minutes": 190.13410194174756
+      },
+      "test_by_triage": {
+        "1": {
+          "n": 31,
+          "mae_minutes": 621.677855715659,
+          "rmse_minutes": 949.7969275059755,
+          "mae_unweighted_minutes": 509.65383881467653
+        },
+        "2": {
+          "n": 330,
+          "mae_minutes": 300.3567988230791,
+          "rmse_minutes": 607.8434882344857,
+          "mae_unweighted_minutes": 314.10282512777457
+        },
+        "3": {
+          "n": 1056,
+          "mae_minutes": 150.36289361271426,
+          "rmse_minutes": 311.2621647831977,
+          "mae_unweighted_minutes": 190.43959734561875
+        },
+        "4": {
+          "n": 567,
+          "mae_minutes": 107.90598589731681,
+          "rmse_minutes": 290.0463061133368,
+          "mae_unweighted_minutes": 121.61938092036769
+        },
+        "5": {
+          "n": 86,
+          "mae_minutes": 118.69696912186544,
+          "rmse_minutes": 355.78084551744877,
+          "mae_unweighted_minutes": 140.87431623323346
+        }
+      }
+    },
+    "wait_minutes": {
+      "label": "WAITTIME",
+      "selected": "baseline_weighted_median",
+      "eligible": 13272,
+      "excluded": 2753,
+      "counts": {
+        "train": 7735,
+        "validation": 2633,
+        "test": 2904
+      },
+      "validation": {
+        "baseline_weighted_median": {
+          "mae_minutes": 27.952352188900285,
+          "rmse_minutes": 55.74844933228904,
+          "mae_unweighted_minutes": 26.158374477781997
+        },
+        "gradient_boosting_7_leaves": {
+          "mae_minutes": 28.243660736644934,
+          "rmse_minutes": 56.04384963436123,
+          "mae_unweighted_minutes": 26.641607712897446
+        },
+        "gradient_boosting_15_leaves": {
+          "mae_minutes": 28.591120697060553,
+          "rmse_minutes": 55.98923595126259,
+          "mae_unweighted_minutes": 27.10103466852105
+        }
+      },
+      "test_selected": {
+        "mae_minutes": 27.651952075250144,
+        "rmse_minutes": 61.9940803908246,
+        "mae_unweighted_minutes": 30.835743801652892
+      },
+      "test_baseline": {
+        "mae_minutes": 27.651952075250144,
+        "rmse_minutes": 61.9940803908246,
+        "mae_unweighted_minutes": 30.835743801652892
+      },
+      "test_by_triage": {
+        "1": {
+          "n": 30,
+          "mae_minutes": 35.46415033126205,
+          "rmse_minutes": 80.38234811645823,
+          "mae_unweighted_minutes": 44.333333333333336
+        },
+        "2": {
+          "n": 306,
+          "mae_minutes": 27.25906657434037,
+          "rmse_minutes": 59.93047610052285,
+          "mae_unweighted_minutes": 28.124183006535947
+        },
+        "3": {
+          "n": 940,
+          "mae_minutes": 33.619621825281236,
+          "rmse_minutes": 68.69436030014936,
+          "mae_unweighted_minutes": 38.55212765957447
+        },
+        "4": {
+          "n": 495,
+          "mae_minutes": 27.743960356308673,
+          "rmse_minutes": 51.66248079545979,
+          "mae_unweighted_minutes": 29.955555555555556
+        },
+        "5": {
+          "n": 75,
+          "mae_minutes": 32.95391699854481,
+          "rmse_minutes": 69.64647367949223,
+          "mae_unweighted_minutes": 39.49333333333333
+        }
+      }
+    },
+    "hospitalization": {
+      "label": "ADMITHOS",
+      "selected": "gradient_boosting_7_leaves",
+      "eligible": 16025,
+      "excluded": 0,
+      "counts": {
+        "train": 9196,
+        "validation": 3409,
+        "test": 3420
+      },
+      "validation": {
+        "baseline_prevalence": {
+          "brier": 0.10824340825430853,
+          "log_loss": 0.37384261339614744,
+          "roc_auc": 0.5,
+          "average_precision": 0.12348593906283561
+        },
+        "gradient_boosting_7_leaves": {
+          "brier": 0.08803056165426096,
+          "log_loss": 0.29404436205980833,
+          "roc_auc": 0.8256154349791498,
+          "average_precision": 0.43632771897452094
+        },
+        "gradient_boosting_15_leaves": {
+          "brier": 0.08963946542924725,
+          "log_loss": 0.29677593922973705,
+          "roc_auc": 0.8211320859767532,
+          "average_precision": 0.4230806789464233
+        }
+      },
+      "test_selected": {
+        "brier": 0.0704600954414459,
+        "log_loss": 0.2502518750055268,
+        "roc_auc": 0.8153894042060275,
+        "average_precision": 0.3685851667777835
+      },
+      "test_baseline": {
+        "brier": 0.08230249156083745,
+        "log_loss": 0.30597700237548303,
+        "roc_auc": 0.5,
+        "average_precision": 0.08926429730026192
+      },
+      "test_by_triage": {
+        "1": {
+          "n": 34,
+          "brier": 0.29839796756227205,
+          "log_loss": 0.8203211279260878,
+          "roc_auc": 0.5508091121982956,
+          "average_precision": 0.687157293796269
+        },
+        "2": {
+          "n": 334,
+          "brier": 0.1921675160420816,
+          "log_loss": 0.5675918808533053,
+          "roc_auc": 0.668023626733272,
+          "average_precision": 0.48996515962024656
+        },
+        "3": {
+          "n": 1075,
+          "brier": 0.08050845111666968,
+          "log_loss": 0.28327081695983275,
+          "roc_auc": 0.7685455196860917,
+          "average_precision": 0.3115491339737305
+        },
+        "4": {
+          "n": 572,
+          "brier": 0.019196726786794904,
+          "log_loss": 0.0951265481651544,
+          "roc_auc": 0.6321437593571677,
+          "average_precision": 0.07765132477722712
+        },
+        "5": {
+          "n": 87,
+          "brier": 0.01258817584265277,
+          "log_loss": 0.05188298192419896,
+          "roc_auc": 0.9999999999999999,
+          "average_precision": 1.0
+        }
+      }
+    }
+  },
+  "method": "Hospital-disjoint 60/20/20 split; PATWT in training, selection and test metrics. No patient ID is supplied: repeated people cannot be ruled out. Models selected only on validation; test not used to tune or refit.",
+  "limits": [
+    "Datos de visitas estadounidenses en 2022; sin validación local ni de víctimas masivas.",
+    "LOV incluye espera: no equivale a service ni a ocupación exclusiva de un médico.",
+    "Triaje NHAMCS 1–5 no se convierte automáticamente a P0/P1/P2.",
+    "Métricas ponderadas descriptivas; no son intervalos de encuesta ni garantías clínicas.",
+    "Ausencias y valores especiales se conservan como NaN; se excluyen etiquetas ausentes.",
+    "Hospitalización significa ingreso en el mismo hospital (ADMITHOS), no necesidad óptima de ingreso."
+  ],
+  "model_sha256": "9b4511f0fe29b85375f1ea39cf924c1e765ab3bbddb0efa181cc8ee9d3315c61",
+  "code_sha256": {
+    "train_ml.py": "a841947b52f34b41e083b646d9cd810326b3c83a960b1e88532ff989fc068362",
+    "ml.py": "3622348236b0ba241887d3f347498d1b99a6b53e1884343c92d60c8c394886cc"
+  },
+  "predictions_sha256": "7e993c88f39ace7324ebfe0c511d0e52b3004331511014152b19e9dc4f1bc7c5"
+}

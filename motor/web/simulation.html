@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABS–SD · Simulación</title><link rel="stylesheet" href="/operations.css"><script src="/simulation-shell.js" defer></script></head>
+<body>
+<aside class="sidebar" aria-label="Navegación principal">
+<a class="brand" href="/operations"><span class="brand-mark">✚</span><span>ABS–SD<small>HOSPITAL DIGITAL</small></span></a>
+<div class="workspace-label">ESPACIO DE TRABAJO</div>
+<div class="hospital-identity"><span class="hospital-avatar">H</span><div><strong id="hospital-name">Hospital local</strong><small>Centro de operación</small></div></div>
+<div class="nav-caption">GESTIÓN HOSPITALARIA</div>
+<nav class="simulation-nav" aria-label="Módulos operativos">
+<a class="nav-link" href="/operations#areas"><span aria-hidden="true">⊞</span>Áreas</a>
+<a class="nav-link" href="/operations#resources"><span aria-hidden="true">▤</span>Recursos</a>
+<a class="nav-link" href="/operations#staff"><span aria-hidden="true">♧</span>Personal</a>
+<a class="nav-link" href="/operations#shifts"><span aria-hidden="true">▦</span>Turnos</a>
+<a class="nav-link" href="/operations#episodes"><span aria-hidden="true">♡</span>Episodios</a>
+<a class="nav-link" href="/operations#assignments"><span aria-hidden="true">⇄</span>Asignaciones</a>
+</nav>
+<div class="nav-caption">INTELIGENCIA Y MODELO</div>
+<a class="nav-link selected" href="/simulation" aria-current="page"><span aria-hidden="true">◇</span>Simulación y gemelo 3D</a>
+<a class="nav-link" href="/operations?settings=1"><span aria-hidden="true">⚙</span>Configuración del hospital</a>
+<div class="sidebar-foot"><span class="status-dot"></span><div><strong>Entorno local</strong><small>Sin fuente HIS conectada</small></div></div>
+</aside>
+<div class="app-content simulation-content">
+<header class="topbar"><div class="breadcrumb">Hospital digital <span>/</span> <strong>Simulación</strong></div><div class="topbar-meta"><span class="local-pill" id="demo-indicator">● Escenario experimental</span><span class="avatar" aria-label="Sesión local">HL</span></div></header>
+<iframe class="simulation-frame" src="/simulator" title="Motor de simulación, gemelo 3D y aprendizaje automático"></iframe>
+</div>
+</body></html>

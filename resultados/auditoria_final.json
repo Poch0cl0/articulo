@@ -1,0 +1,9 @@
+{
+  "evaluation_rows": 450,
+  "patient_conservation": true,
+  "resource_utilization_bounds": true,
+  "disjoint_seeds": true,
+  "selected_equals_priority": true,
+  "sections": 11,
+  "manuscript_words": 4859
+}

@@ -1,0 +1,697 @@
+
+PAGE 1
+UNIVERSIDAD NACIONAL DE TRUJILLO
+FACULTAD DE INGENIERÍA
+ESCUELA PROFESIONAL DE INGENIERÍA DE SISTEMAS
+Digital Twin-Driven Real-Time Optimization of Hospital Resource Allo-
+cation During Mass Casualty Events: A Hybrid Agent-Based and System 
+Dynamics Model
+Autores:
+Peña Serrano Jefferson Miguel
+Robles Perez Martin Aryan
+Trujillo - Perú
+2026
+
+PAGE 2
+Índice general
+1 Introducción . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2 Antecedentes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+2.1 Digital Twins: Fundamentos y Evolución . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+2.2 Tipos y Funciones de los Digital Twins en Healthcare . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+2.3 Modelado y Simulación en Emergency Departments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+2.3.1 Agent-Based Simulation (ABS) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+2.3.2 System Dynamics (SD) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+2.4 Arquitectura de Digital Twins para Emergency Departments . . . . . . . . . . . . . . . . . . . . . 17
+2.4.1 Modos Operativos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.4.2 Componentes Técnicos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.4.3 Sincronización PT-DT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+2.5 Operacionalización de la Asignación de Recursos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+2.5.1 Tipos de Recursos en MCEs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+2.5.2 Indicadores Clave de Rendimiento (KPIs) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+2.6 Desafíos y Oportunidades . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.6.1 Desafíos Técnicos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.6.2 Desafíos Humanos y Organizacionales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+2.6.3 Oportunidades de Investigación . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+2.7 Propuesta de Modelo Híbrido ABS-SD . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Bibliography . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Contents
+
+PAGE 3
+Introducción
+Los Eventos de Víctimas Masivas (Mass Casualty Events, MCEs) representan uno de los 
+desafíos más críticos para los sistemas de salud a nivel global. Según los gemelos digitales —
+simulaciones dinámicas y en tiempo real de sistemas o entornos— representan un cambio de 
+paradigma en la medicina de urgencias (Li et al., 2025, p. 1). Estas situaciones, caracterizadas 
+por un desbordamiento súbito de la demanda de atención médica respecto a la capacidad 
+disponible, ponen a prueba la resiliencia de los servicios de urgencias y la capacidad de 
+respuesta de los hospitales. Como señalan la multitud de actores y sus interacciones hace 
+que aún sea difícil abordar adecuadamente este problema (Moyaux et al., 2023, p. 1 ). La 
+complejidad inherente a los departamentos de emergencia, donde confluyen múltiples 
+actores (médicos, enfermeras, personal administrativo) y procesos interdependientes, difi -
+culta la gestión óptima de recursos en escenarios de crisis. Para un sistema complejo como 
+un hospital, surgen muchos problemas y obstáculos debido a la variabilidad resultante de 
+la incongruencia entre la demanda, la capacidad y la disponibilidad de recursos (Elkefi & 
+Asan, 2022, p. 2). En este sentido, la dinámica de sistemas (System Dynamics) aborda estas 
+brechas modelando los hospitales como sistemas dinámicos con relaciones causa-efecto 
+recíprocas (Mehrholassani et al., 2025, p. 2), lo que permite simular “gemelos digitales” de 
+las operaciones hospitalarias, posibilitando a los gestores probar políticas en entornos sin 
+riesgos (Mehrholassani et al., 2025, p. 2).
+Uno de los problemas fundamentales que enfrentan los sistemas de salud durante 
+MCEs es la incongruencia entre la demanda, la capacidad y la disponibilidad de recursos 
+(Elkefi & Asan, 2022, p. 1). Esta desalineación se manifiesta en la saturación de las salas de 
+
+PAGE 4
+urgencias con un incremento exponencial de tiempos de espera y estancia prolongada, la 
+escasez de personal crítico para atender el volumen de pacientes, la disponibilidad limitada 
+de equipos como ventiladores, camas UCI y quirófanos, así como fallos en la comunicación 
+y coordinación entre servicios y niveles de atención. La optimización del flujo de pacientes 
+ha sido el enfoque más común en los estudios de dinámica de sistemas en hospitales (43,5%), 
+seguida por la asignación de recursos (21,7%) y la gestión de crisis (13%) (Mehrholassani 
+et al., 2025, p. 5 ). Además, el servicio de urgencias ha recibido la mayor atención, con 23 
+estudios (33,3%) (Mehrholassani et al., 2025, p. 3).
+Los sistemas de gestión hospitalaria tradicionales se basan en modelos de decisión 
+simplificados que no logran capturar la naturaleza dinámica y compleja de los entornos 
+urbanos durante crisis sanitarias. Los sistemas actuales de atención prehospitalaria de ur -
+gencias a menudo presentan dificultades con una asignación subóptima de recursos debido 
+a su dependencia de modelos de decisión simplificados que no logran capturar la naturaleza 
+dinámica y compleja de los entornos urbanos (Li et al., 2025, p. 3 ). En este contexto, la 
+toma de decisiones se apoya frecuentemente en protocolos estáticos que no se adaptan a la 
+evolución de la demanda, en el juicio clínico no sistematizado sujeto a sesgos y fatiga del 
+personal, y en sistemas de información desconectados que no ofrecen una visión unificada 
+y en tiempo real (Li et al., 2025, p. 3 ). Según la integración clínica en el mundo real es 
+escasa y la mayoría de los modelos permanecen en fase de prueba de concepto o en etapas 
+tempranas de prototipo (Calcaterra et al., 2025, p. 11). Las simulaciones convencionales en 
+el ámbito sanitario se parametrizan típicamente utilizando datos históricos, lo que limita su 
+capacidad para apoyar la toma de decisiones operativas en tiempo real (Harper et al., 2026, 
+
+PAGE 5
+p. 1). Esta brecha entre la innovación académica y la práctica operativa es particularmente 
+crítica en el ámbito de la gestión de emergencias, donde cada minuto cuenta (Li et al., 2025, 
+p. 3).
+La literatura reciente ha identificado varias brechas significativas que justifican la 
+necesidad de nuevas aproximaciones metodológicas. En primer lugar, existe una brecha de 
+integración entre la simulación y el mundo real, pues aunque más del 40% de los estudios 
+revisados reportaron un alto rendimiento técnico en entornos basados en simulación, solo 
+unos pocos demostraron integración en flujos de trabajo clínicos rutinarios (Calcaterra et 
+al., 2025, p. 11). Esta desconexión entre la investigación académica y la práctica clínica limita 
+el impacto real de los modelos predictivos y reduce su utilidad para los tomadores de deci-
+siones en situaciones de crisis. En segundo lugar, se identifica una brecha de sincronización, 
+dado que el sistema digital está por detrás del gemelo físico porque se sincroniza según 
+este cada vez que se registra un cambio en su sistema de información (Moyaux et al., 2023, 
+p. 10). Este retraso puede ser crítico en situaciones de crisis donde la información debe 
+fluir en tiempo real para tomar decisiones oportunas, especialmente cuando la demanda de 
+atención supera la capacidad instalada.
+En tercer lugar, existe una brecha de escalabilidad, pues dada la complejidad 
+inherente de las tecnologías de Digital Twin y el vasto volumen de datos de salud, escalar 
+estas soluciones a través de múltiples niveles (comunitario, estatal, nacional) introduce 
+desafíos adicionales, incluyendo estandarización transfronteriza e interoperabilidad (Rehan 
+& Rehan, 2025, p. 18). El 65% de los estudios se han centrado en entornos de altos ingresos, 
+descuidando las regiones con bajos recursos donde las brechas de infraestructura pueden 
+
+PAGE 6
+limitar la aplicabilidad (Mehrholassani et al., 2025, p. 5). Esta limitación es particularmente 
+relevante en contextos como el peruano, donde los sistemas de información hospitalarios 
+presentan una fragmentación significativa y una heterogeneidad en los formatos de registro 
+de datos. En cuarto lugar, se ha documentado una brecha en la toma de decisiones, pues 
+las soluciones generadas por los sistemas de apoyo a la decisión rara vez se aplican direc -
+tamente a los sistemas físicos, sino que a menudo se adaptan manualmente de antemano 
+(Moyaux et al., 2023, p. 4 ). Esta limitación subraya la necesidad de incorporar al ser 
+humano en el bucle de decisión, reconociendo que todos los modelos son falsos y que el 
+sistema físico debe ser el maestro y el digital un esclavo (Moyaux et al., 2023, p. 4 ). La 
+dinámica de sistemas facilita la participación de los actores involucrados, traduciendo datos 
+complejos en información procesable a través de herramientas visuales como diagramas 
+de flujo (Mehrholassani et al., 2025, p. 2 ). Finalmente, la heterogeneidad biológica influye 
+significativamente en la progresión de la enfermedad y en los resultados del tratamiento (Li 
+et al., 2025, p. 5), requiriendo conjuntos de datos vastos y de alta resolución para construir 
+modelos robustos y precisos.
+Frente a estas limitaciones, el paradigma de los Digital Twins (DTs) emerge como 
+una solución prometedora. Un gemelo digital es una representación virtual de un activo 
+físico replicado a través de una conexión de datos, que permite vincular el sistema con sus 
+copias virtuales de manera bidireccional (Elkefi & Asan, 2022, p. 1 ). En el contexto de la 
+gestión de emergencias, los DTs pueden diseñar, optimizar y probar productos, procesos y 
+sistemas (Elkefi & Asan, 2022, p. 2), proporcionan monitoreo en tiempo real y simulaciones 
+predictivas (Moyaux et al., 2023, p. 1 ), así como evalúan el impacto de los cambios en los 
+
+PAGE 7
+servicios sin interrumpir las actividades diarias del hospital (Elkefi & Asan, 2022, p. 5). La 
+implementación de DTs en el sector salud se ha clasificado en tres tipos: gemelo digital 
+de producto enfocado en dispositivos médicos, wearables y equipos; gemelo digital de 
+proceso orientado a la optimización de flujos de trabajo y procedimientos; y gemelo digital 
+de sistema centrado en el rendimiento global y la gestión estratégica (Elkefi & Asan, 2022, 
+p. 2). Esta tipología resulta particularmente relevante para abordar la complejidad de los 
+MCEs, donde confluyen aspectos relacionados con los tres tipos de DTs.
+La presente investigación propone un modelo híbrido basado en Agent-Based Sim-
+ulation (ABS) y System Dynamics (SD) para la optimización en tiempo real de la asignación 
+de recursos hospitalarios durante MCEs. Este enfoque integra el ABS para modelar el 
+comportamiento individual de pacientes, personal médico y recursos (Moyaux et al., 2023, 
+p. 6), la Dinámica de Sistemas (SD) para capturar las dinámicas del sistema y las relaciones 
+causales en la propagación de la crisis (Rehan & Rehan, 2025, p. 8 ), la sincronización en 
+tiempo real con los sistemas de información hospitalarios, y la inclusión del humano en el 
+bucle de decisión (human-in-the-loop) para la toma de decisiones informadas y adaptativas 
+(Moyaux et al., 2023, p. 4). La organización descentralizada basada en sistemas multiagente 
+para la programación dinámica de recursos parece ser una alternativa favorable en el 
+contexto de gemelos digitales, ya que produce resultados de calidad relativamente buena 
+en un corto periodo de tiempo (Florencia et al., 2025, p. 12). La justificación de este enfoque 
+híbrido se fundamenta en la evidencia de que los gemelos digitales que incorporan actual -
+izaciones de datos en tiempo real o longitudinales producen las mejoras de rendimiento más 
+sustanciales (Calcaterra et al., 2025, p. 6 ). Además, los modelos híbridos que integran SD 
+
+PAGE 8
+con simulación de eventos discretos han mejorado el análisis granular, como la rotación de 
+camas y la programación quirúrgica (Mehrholassani et al., 2025, p. 5). La naturaleza dual de 
+los MCEs combina comportamientos individuales (triaje, decisiones clínicas) y dinámicas 
+de sistema (flujo de pacientes, capacidad UCI), lo que hace que la integración de ambas 
+metodologías sea particularmente adecuada para abordar la complejidad de estos eventos 
+críticos.
+Antecedentes
+La investigación sobre simulación y asignación de recursos sanitarios ofrece antecedentes 
+para integrar el comportamiento individual de los actores, la dinámica agregada del sistema 
+y el apoyo a la decisión. Los trabajos revisados permiten reconocer una trayectoria que 
+comienza con modelos híbridos para evaluar tecnologías sanitarias y avanza hacia aplica -
+ciones de gemelos digitales y optimización de recursos en servicios de emergencia.
+Uno de los antecedentes metodológicos es el trabajo de Djanatliev et al. (2012), 
+quienes desarrollaron un entorno de simulación híbrida para la evaluación prospectiva 
+de tecnologías sanitarias, denominado ProHTA. Implementado en AnyLogic, el modelo 
+combinó dinámica de sistemas para representar procesos poblacionales, epidemiológicos 
+y financieros con simulación basada en agentes para describir pacientes y recorridos 
+asistenciales. Los componentes intercambiaban información mediante un mecanismo de 
+acoplamiento débil con sincronización anual (Djanatliev et al., 2012, pp. 3–6 ). Como 
+demostración, los autores evaluaron unidades móviles para la atención del accidente 
+cerebrovascular y obtuvieron un incremento simulado de la tasa de trombólisis de aprox -
+imadamente 10,6 % a 18,2 % (Djanatliev et al., 2012, p. 10 ). El estudio constituye un 
+
+PAGE 9
+antecedente de integración SD–ABS, aunque su escala de sincronización y su propósito 
+de evaluación tecnológica requieren adaptación para apoyar decisiones durante una emer-
+gencia de evolución rápida.
+Posteriormente, Djanatliev y German (2013) ampliaron ProHTA mediante la incor-
+poración de simulación de eventos discretos para representar los procesos hospitalarios. 
+Esta extensión permitió asociar los flujos asistenciales a las instituciones y utilizar a los 
+pacientes como entidades que recorren dichos procesos, evitando reproducir una estructura 
+de procesos independiente para cada paciente (Djanatliev & German, 2013, p. 5 ). En el 
+caso de las unidades móviles de atención al accidente cerebrovascular, las simulaciones 
+mostraron que una mejor distribución espacial de la misma cantidad de unidades podía 
+incrementar el número de pacientes atendidos dentro del intervalo de 0 a 90 minutos 
+desde el inicio del evento (Djanatliev & German, 2013, p. 10). Este antecedente evidencia la 
+utilidad de combinar niveles de representación para evaluar alternativas de distribución de 
+recursos. Sin embargo, los resultados presentados corresponden a escenarios exploratorios 
+y no acreditan una implementación de optimización hospitalaria en tiempo real durante 
+eventos de víctimas masivas.
+Cassidy et al. (2019) examinaron el desarrollo de estas aproximaciones mediante una 
+revisión sistemática sobre modelos de dinámica de sistemas y modelos basados en agentes 
+aplicados a sistemas de salud. La revisión identificó 28 publicaciones que empleaban SDM 
+y 11 que utilizaban ABM, con un trabajo que integraba ambas metodologías. También 
+encontró una concentración de estudios en países de ingresos altos y una presencia 
+destacada de aplicaciones en atención de emergencia, atención aguda y cuidados de larga 
+
+PAGE 10
+duración (Cassidy et al., 2019, p. 1 ). Los autores señalaron la necesidad de ampliar estas 
+investigaciones hacia países de ingresos bajos y medios. Estos hallazgos documentan la 
+limitada integración SD–ABM dentro del conjunto de estudios incluido en aquella revisión; 
+por su fecha y alcance, deben interpretarse como un antecedente histórico y no como un 
+recuento actualizado de todos los modelos híbridos existentes.
+En una contribución metodológica más reciente, Nguyen et al. (2024) propusieron 
+un marco para conceptualizar modelos híbridos de dinámica de sistemas y simulación 
+basada en agentes. Su investigación respondió a la falta de orientaciones prácticas suficien-
+temente explícitas sobre cuándo, por qué y cómo combinar ambos métodos. El marco se 
+construyó a partir de la revisión y reflexión sobre literatura metodológica y aplicada, y se 
+utilizó en un caso de transmisión de COVID-19 entre residencias de cuidado vinculadas 
+por personal compartido (Nguyen et al., 2024, pp. 1–2 ). Su aporte consiste en orientar las 
+decisiones de diseño y comunicar la estructura del modelo híbrido. Para la presente inves-
+tigación, este antecedente respalda la necesidad de justificar qué procesos hospitalarios se 
+representarán mediante ABS y cuáles mediante SD, así como de especificar sus intercam -
+bios de información. Su aplicación original se centró en transmisión de infecciones, por lo 
+que su traslado a la asignación de recursos durante eventos de víctimas masivas requiere 
+una adaptación específica.
+En el ámbito de los gemelos digitales aplicados a la respuesta de emergencia, 
+Penverne et al. (2024) desarrollaron un modelo de simulación para evaluar alternativas de 
+organización de centros de comunicación médica de emergencia en Francia. Compararon 
+una organización territorial compartimentada con escenarios que permitían distribuir las 
+
+PAGE 11
+llamadas entre centros. El indicador principal fue la calidad del servicio según la atención 
+de llamadas dentro de los primeros 30 segundos; el estudio reportó mejoras del 17 % al 21 
+% mediante la reorganización evaluada (Penverne et al., 2024, p. 1 ). Los autores aclararon 
+que el modelo se alimentaba con datos reales, pero que la conexión y sincronización en 
+tiempo real quedaban fuera del alcance de la investigación (Penverne et al., 2024, p. 2). Este 
+trabajo aporta evidencia de la utilidad de la simulación para evaluar decisiones organiza -
+tivas sin intervenir en la operación cotidiana. A la vez, permite distinguir entre un gemelo 
+digital orientado al análisis de escenarios y uno conectado continuamente con la operación 
+hospitalaria.
+Respecto al modelado de departamentos de emergencia, Mesas et al. (2025) pro -
+pusieron un marco modular de simulación basada en agentes desarrollado con NetLogo 
+y Python. Su objetivo fue facilitar la adaptación y reutilización de componentes de simu -
+ladores que, por su estructura monolítica, resultaban difíciles de transferir entre hospitales. 
+La demostración utilizó una representación simplificada del servicio de emergencia de 
+Sabadell, organizada en triaje y áreas de atención según la prioridad de los pacientes (Mesas 
+et al., 2025, pp. 5–6 ). El trabajo mostró la viabilidad inicial de organizar los agentes en 
+componentes independientes, pero reconoció que la validación realizada era insuficiente 
+para una integración completa y que se necesitaban pruebas en distintos departamentos 
+de emergencia (Mesas et al., 2025, p. 7 ). Este antecedente resulta pertinente para diseñar 
+un modelo adaptable a diferentes capacidades y procedimientos hospitalarios, aunque 
+no demuestra todavía una solución plenamente integrada para la gestión de eventos de 
+víctimas masivas.
+
+PAGE 12
+En relación con la optimización de recursos críticos, Li et al. (2024), en la segunda 
+versión de su prepublicación, propusieron un modelo de aprendizaje por refuerzo profundo 
+basado en una red Q con arquitectura transformer. El estudio utilizó 11 773 ingresos a 
+cuidados intensivos con ventilación mecánica y separó los registros en conjuntos tempo -
+rales de entrenamiento, validación y prueba (Li et al., 2024, p. 5). En el escenario evaluado 
+con aproximadamente la mitad de la capacidad de ventiladores, TxDDQN-fair alcanzó una 
+supervivencia normalizada del 85,41 %, frente al 80,88 % del protocolo SOFA y al 81,99 % del 
+protocolo multiprincipio; estos valores corresponden a la evaluación computacional y no 
+a una intervención clínica prospectiva (Li et al., 2024, p. 6). Los autores identificaron como 
+limitaciones el uso de datos de un solo sistema sanitario y la necesidad de entrenar modelos 
+separados para distintos niveles de escasez (Li et al., 2024, p. 19). El antecedente aporta una 
+referencia para evaluar eficiencia y equidad, aunque se concentra en ventiladores y no en 
+la asignación conjunta de múltiples recursos hospitalarios.
+Finalmente, Li et al. (2025) analizaron, en un artículo de perspectiva, las aplicaciones 
+de los gemelos digitales a la atención prehospitalaria, la gestión intrahospitalaria y la recu-
+peración. Los autores plantearon que la integración de información clínica, datos operativos 
+y monitoreo permitiría apoyar la coordinación de recursos y anticipar necesidades asisten-
+ciales. También examinaron el potencial de los gemelos de dispositivos médicos para prever 
+demanda y orientar la distribución de equipos durante incidentes con múltiples víctimas (Li 
+et al., 2025, pp. 3–4). Su contribución es conceptual: organiza posibilidades de aplicación y 
+reconoce que el desarrollo de estos sistemas en atención de emergencia permanece en una 
+
+PAGE 13
+etapa inicial (Li et al., 2025, p. 4). Por ello, este trabajo respalda la pertinencia del problema, 
+pero no constituye una validación experimental del modelo híbrido propuesto.
+A partir de estos antecedentes, la presente investigación delimita una oportunidad 
+de integración entre simulación híbrida, actualización del estado hospitalario y evaluación 
+de decisiones de asignación de recursos. La contribución propuesta consiste en desarrollar 
+y evaluar un modelo ABS–SD orientado a eventos de víctimas masivas, capaz de relacionar 
+las interacciones de pacientes y personal con la evolución agregada de la demanda y la 
+capacidad asistencial. Para establecer su aporte, será necesario comparar su desempeño con 
+políticas de referencia y evaluar tiempos de espera, utilización de recursos, atención según 
+prioridad y tiempo de respuesta computacional. Esta delimitación se deriva de la compara-
+ción de los trabajos revisados y deberá contrastarse mediante la validación del modelo, sin 
+asumir de antemano su superioridad ni la inexistencia de propuestas semejantes.
+2.1 Digital Twins: Fundamentos y Evolución
+El concepto de Digital Twin fue introducido por Michael Grieves en 2002 como el modelo 
+conceptual subyacente a la gestión del ciclo de vida del producto (Elkefi & Asan, 2022, p. 3). 
+Desde entonces, el concepto ha evolucionado significativamente, impulsado por los avances 
+en tecnologías de comunicación, sensores, análisis de big data, Internet de las Cosas (IoT) 
+y tecnologías de simulación (Vallee, 2023, p. 2). En la actualidad, un Digital Twin se define 
+como una representación virtual de un activo físico replicado a través de una conexión 
+de datos, que permite vincular el sistema con sus copias virtuales de manera bidireccional 
+(Elkefi & Asan, 2022, p. 1). Esta definición implica que el DT no es simplemente un modelo 
+estático, sino un sistema dinámico que se actualiza continuamente con datos del mundo 
+real y que puede simular comportamientos futuros (Vallee, 2023, p. 2).
+
+PAGE 14
+Según la tipología propuesta por Kritzinger et al. (2018) y citada por (Moyaux et 
+al., 2023, p. 2), los sistemas digitales se clasifican en tres categorías según el flujo de datos 
+entre el sistema físico y el sistema digital. El Digital Model presenta un flujo de datos 
+manual en ambas direcciones, representando una réplica estática sin conexión automática. 
+El Digital Shadow presenta un flujo automático desde el sistema físico hacia el sistema 
+digital y manual en sentido contrario, permitiendo el monitoreo y la visualización en tiempo 
+real. Finalmente, el Digital Twin presenta un flujo automático en ambas direcciones, lo 
+que permite la sincronización bidireccional y el control del sistema físico desde el entorno 
+digital (Moyaux et al., 2023, p. 2). Esta clasificación resulta fundamental para comprender el 
+nivel de integración y automatización que puede alcanzar un DT en el contexto hospitalario.
+(Moyaux et al., 2023, p. 4) propone una refinación de esta tipología para incorporar 
+al ser humano en el bucle de decisión, reconociendo tres principios fundamentales. En 
+primer lugar, “todos los modelos son falsos”, lo que implica que el sistema digital es siempre 
+una simplificación de la realidad y puede presentar desviaciones. En segundo lugar, “dos 
+sistemas no pueden controlarse mutuamente”, por lo que el sistema físico debe ser el 
+maestro y el sistema digital el esclavo, evitando conflictos de control. En tercer lugar, “el 
+sistema digital debe ser lo menos invasivo posible”, especialmente en entornos de atención 
+médica donde los profesionales deben mantener su autonomía y capacidad de juicio clínico 
+(Moyaux et al., 2023, p. 4 ). Esta perspectiva humanocéntrica es particularmente relevante 
+para la gestión de emergencias, donde las decisiones deben tomarse con rapidez y adapt -
+abilidad.
+
+PAGE 15
+2.2 Tipos y Funciones de los Digital Twins en Healthcare
+Según (Elkefi & Asan, 2022, p. 2), los DTs en el sector salud se clasifican en tres tipos según 
+su objeto de aplicación. El DT de producto se enfoca en dispositivos médicos, wearables 
+y equipos hospitalarios, permitiendo el monitoreo de su rendimiento y el mantenimiento 
+predictivo. El DT de proceso está orientado a la optimización de flujos de trabajo y 
+procedimientos clínicos, facilitando la identificación de cuellos de botella y la mejora de 
+la eficiencia operativa. El DT de sistema se centra en el rendimiento global y la gestión 
+estratégica de la organización sanitaria, integrando información de múltiples fuentes para 
+la toma de decisiones a nivel directivo (Elkefi & Asan, 2022, p. 2 ). La combinación e 
+integración de estos tres tipos de DTs a medida que evolucionan conjuntamente se conoce 
+como el hilo digital (digital thread) (Elkefi & Asan, 2022, p. 2).
+(Elkefi & Asan, 2022, p. 4) identifica cuatro funciones principales que los DTs desem-
+peñan en la gestión de sistemas de salud. La gestión de la seguridad (Safety Management) 
+implica evitar daños no intencionados a las personas durante la prestación de servicios 
+de salud, así como identificar amenazas relacionadas con crisis y controlar sus impactos. 
+El control operacional (Operational Control) busca asegurar altos niveles de eficiencia del 
+sistema, garantizando que las instalaciones sanitarias funcionen sin problemas y ofrezcan 
+atención de calidad a cada paciente. La gestión de la información (Information Manage -
+ment) asegura la privacidad, seguridad y acceso en tiempo real a la información para todos 
+los actores involucrados. Finalmente, la gestión de la salud y la promoción del bienestar 
+(Health Management and Well-being Promotion) empodera las capacidades de autocuidado 
+mediante la habilitación de prácticas de gestión de la salud (Elkefi & Asan, 2022, p. 4). Estas 
+
+PAGE 16
+funciones son directamente aplicables al contexto de los MCEs, donde la coordinación entre 
+seguridad, eficiencia operativa, flujo de información y atención al paciente resulta crítica.
+2.3 Modelado y Simulación en Emergency Departments
+2.3.1 Agent-Based Simulation (ABS)
+La simulación basada en agentes (ABS) se ha consolidado como una herramienta funda -
+mental para modelar sistemas complejos como los departamentos de emergencia (Moyaux 
+et al., 2023, p. 6 ). A diferencia de la simulación de eventos discretos tradicional, el ABS 
+permite varios niveles de abstracción, posibilitando que un sistema digital comience como 
+un modelo grueso y luego se refine gradualmente a medida que se dispone de más infor -
+mación y se comprenden mejor las dinámicas del sistema (Moyaux et al., 2023, p. 6 ). Esta 
+flexibilidad es particularmente valiosa en entornos hospitalarios donde la complejidad y la 
+variabilidad son inherentes.
+El ABS modela el comportamiento emergente a través de las interacciones entre 
+agentes autónomos que representan entidades como pacientes, médicos, enfermeras y 
+recursos materiales (Moyaux et al., 2023, p. 3 ). Estas interacciones generan patrones com -
+plejos que no son predecibles a nivel agregado, lo que permite capturar la heterogeneidad 
+de los comportamientos individuales y su impacto en el rendimiento global del sistema 
+(Moyaux et al., 2023, p. 3 ). En el contexto de los MCEs, el ABS resulta especialmente 
+adecuado para modelar la toma de decisiones de triaje, la asignación dinámica de personal 
+y la variabilidad en los tiempos de atención según la gravedad de los pacientes.
+2.3.2 System Dynamics (SD)
+La dinámica de sistemas (SD) complementa al ABS al capturar las relaciones causales y 
+los bucles de retroalimentación que caracterizan la dinámica de crisis en los sistemas de 
+
+PAGE 17
+salud (Rehan & Rehan, 2025, p. 8 ). Mientras que el ABS se enfoca en el comportamiento 
+de entidades individuales, la SD se centra en los comportamientos a nivel agregado, como 
+la propagación de la demanda de atención, la saturación de la capacidad instalada y los 
+efectos de las políticas de gestión (Rehan & Rehan, 2025, p. 8). Esta aproximación permite 
+evaluar el impacto de intervenciones a nivel de sistema, como la apertura de nuevas áreas 
+de atención, la reasignación de personal entre unidades o la modificación de protocolos de 
+triaje.
+La integración de ABS y SD en un modelo híbrido permite abordar la naturaleza dual 
+de los MCEs, que combinan comportamientos individuales (como las decisiones clínicas 
+de los médicos y las respuestas de los pacientes) con dinámicas de sistema (como el flujo 
+agregado de pacientes, la ocupación de camas UCI y la disponibilidad de recursos críticos) 
+(Rehan & Rehan, 2025, p. 8). Esta complementariedad metodológica está justificada por la 
+evidencia de que los DTs que incorporan actualizaciones de datos en tiempo real y enfoques 
+multimodales producen las mejoras de rendimiento más sustanciales (Calcaterra et al., 2025, 
+p. 6).
+2.4 Arquitectura de Digital Twins para Emergency Departments
+2.4.1 Modos Operativos
+(Moyaux et al., 2023, p. 5 ) propone una arquitectura para el DT de un departamento de 
+emergencias que opera en tres modos diferenciados según el nivel de integración entre el 
+sistema físico y el sistema digital. El primer modo, denominado Digital Shadow (DT_mode = 
+0), se limita al monitoreo en tiempo real del estado actual del departamento de emergencias 
+mediante transiciones (digital shadow) que sincronizan el estado de los agentes digitales 
+con sus contrapartes físicas (Moyaux et al., 2023, p. 5). Este modo proporciona una visual-
+
+PAGE 18
+ización actualizada del flujo de pacientes, la ocupación de recursos y la carga de trabajo del 
+personal, permitiendo a los gestores tener una visión clara de la situación en cada momento.
+El segundo modo, denominado Synchronised DT (DT_mode = 1), combina el moni-
+toreo en tiempo real con la simulación predictiva mediante la activación simultánea de 
+transiciones (simulación) (Moyaux et al., 2023, p. 5). En este modo, el sistema digital no solo 
+refleja el estado actual del PT, sino que también simula posibles futuros a una velocidad 
+acelerada (determinada por el parámetro DT_acceleration_factor), lo que permite a los 
+decisores anticipar problemas potenciales y evaluar el impacto de intervenciones antes de 
+implementarlas en el mundo real (Moyaux et al., 2023, p. 5 ). Este modo resulta especial -
+mente valioso durante MCEs, donde la capacidad de prever la evolución de la demanda y la 
+utilización de recursos puede marcar la diferencia entre una respuesta efectiva y el colapso 
+del sistema.
+El tercer modo, denominado Exploratory DT (DT_mode = 2), se centra exclusiva -
+mente en la simulación mediante transiciones, permitiendo realizar simulaciones Monte 
+Carlo con variaciones de parámetros y análisis de escenarios “what-if” (Moyaux et al., 2023, 
+p. 5). En este modo, el sistema digital se inicializa a partir de un archivo que guarda el 
+estado del IS del PT y luego simula múltiples futuros posibles, lo que facilita la planificación 
+estratégica y la evaluación de diferentes políticas de asignación de recursos (Moyaux et al., 
+2023, p. 5). La capacidad de cambiar entre estos tres modos en un mismo entorno propor -
+ciona a los decisores una flexibilidad sin precedentes para abordar diferentes necesidades 
+en distintas fases de la gestión de una crisis.
+
+PAGE 19
+2.4.2 Componentes Técnicos
+Según (Rehan & Rehan, 2025, p. 10 ), los componentes clave de un DT en el sector 
+salud incluyen múltiples capas tecnológicas que deben coordinarse para garantizar un 
+funcionamiento eficaz. La capa de recolección de datos (Data Collection Methods) utiliza 
+sensores integrados en dispositivos médicos o wearables, así como interfaces gráficas de 
+usuario (GUI), para capturar biomarcadores digitales y datos procesales que representan 
+información en tiempo real sobre la condición fisiológica y conductual de los pacientes 
+(Rehan & Rehan, 2025, p. 10 ). La capa de Internet de las Cosas Médicas (Internet of 
+Medical Things, IoMT) corresponde a la red de dispositivos médicos conectados a internet, 
+equipados con capacidades de sensado y procesamiento, que permiten el monitoreo remoto 
+de pacientes y la entrega de tratamientos en áreas remotas o subdesarrolladas (Rehan & 
+Rehan, 2025, p. 10).
+La capa de comunicación y redes (Communication and Networks) emplea protoco-
+los como MQTT para el intercambio de datos en tiempo real, CoAP para la comunicación en 
+redes IoT de salud, y HTTPS para la transmisión segura de información sanitaria a través de 
+internet (Rehan & Rehan, 2025, p. 10). Estos protocolos pueden operar sobre redes cableadas 
+e inalámbricas, como Zigbee, Bluetooth, Ethernet o Wi-Fi, dependiendo de los requisitos 
+específicos de la aplicación (Rehan & Rehan, 2025, p. 10 ). La capa de procesamiento y 
+almacenamiento de datos (Data Processing and Storage) convierte datos de diversas fuentes 
+(sensores, informes de pacientes, IoMT, dispositivos de imagen médica) en un formato 
+uniforme mediante estándares comunes, metodologías de integración, normalización y 
+
+PAGE 20
+limpieza, facilitando el análisis integral y la toma de decisiones informadas (Rehan & Rehan, 
+2025, p. 10).
+La capa de modelado y simulación (System Modeling and Simulation) constituye el 
+núcleo del DT, donde se genera el modelo virtual que replica las propiedades, procesos y 
+comportamientos del sistema físico (Rehan & Rehan, 2025, p. 10). Esta capa puede emplear 
+diversas técnicas como el modelado basado en agentes (ABM), la simulación de eventos 
+discretos, el modelado basado en ML/AI, enfoques híbridos y modelado estadístico (Rehan 
+& Rehan, 2025, p. 10). Finalmente, la capa de análisis predictivo, validación y visualización 
+(Predictive Analytics, Validation and Visualizations) utiliza técnicas estadísticas basadas 
+en IA y enfoques de aprendizaje automático/profundo para pronosticar comportamientos 
+futuros, validando continuamente las predicciones del DT contra el sistema físico para 
+refinar el modelo y mejorar su precisión (Rehan & Rehan, 2025, p. 11).
+2.4.3 Sincronización PT-DT
+Un aspecto crítico para el funcionamiento del DT es su mecanismo de sincronización con 
+el sistema físico (PT). (Moyaux et al., 2023, p. 10 ) señala que el sistema digital siempre 
+está detrás del PT porque se sincroniza cada vez que se registra un cambio en el sistema 
+de información del hospital. Este retraso puede ser corto si los cuidadores actualizan los 
+archivos de los pacientes después de cada tratamiento, o largo cuando actualizan al final 
+del día (Moyaux et al., 2023, p. 10 ). Esta limitación es particularmente relevante en MCEs, 
+donde la velocidad de actualización de la información puede afectar significativamente la 
+capacidad de respuesta.
+(Moyaux et al., 2023, p. 4 ) también destaca que la re-sincronización debe ser 
+periódica porque si el sistema digital simula eventos no presentes en el PT, entonces el 
+
+PAGE 21
+sistema digital es incorrecto y debe re-sincronizarse en el PT, no al revés. Esta relación 
+asimétrica refuerza la noción de que el PT es el maestro y el sistema digital el esclavo, 
+especialmente en entornos sanitarios donde los profesionales clínicos ya toman decisiones 
+y pueden discrepar de las sugerencias del sistema digital (Moyaux et al., 2023, p. 4 ). La 
+sincronización se facilita mediante transiciones que actualizan el estado de los agentes 
+digitales según la información guardada en el IS del PT, mientras que las transiciones 
+modelan las interacciones entre agentes para realizar simulaciones (Moyaux et al., 2023, 
+p. 5).
+2.5 Operacionalización de la Asignación de Recursos
+2.5.1 Tipos de Recursos en MCEs
+La gestión de recursos en eventos de víctimas masivas abarca múltiples categorías que 
+deben ser coordinadas de manera integrada. (Li et al., 2025, p. 3) identifica que los recursos 
+críticos incluyen personal médico y de enfermería, equipamiento como ventiladores y 
+monitores, infraestructura como camas UCI y quirófanos, así como suministros médicos y 
+logística. (Vallee, 2023, p. 3) añade que la asignación de recursos debe considerar no solo la 
+disponibilidad física, sino también la competencia del personal y la capacidad de los equipos 
+para responder a demandas específicas. En el contexto de los MCEs, la optimización de la 
+asignación de recursos requiere considerar la interacción entre estas categorías, ya que la 
+escasez en una de ellas puede generar cuellos de botella en las demás (Vallee, 2023, p. 3).
+(Elkefi & Asan, 2022, p. 5) documenta aplicaciones específicas de DTs para la gestión 
+de recursos en entornos hospitalarios, incluyendo el seguimiento de las vías de los pacientes 
+dentro de la organización sanitaria para gestionar la creciente demanda y disminuir los 
+tiempos de espera y los retrasos. Estas aplicaciones, como el sistema HospiTwin, permiten 
+
+PAGE 22
+equilibrar la oferta y la demanda, controlar la carga de trabajo creciente y proporcionar 
+información clave a los tomadores de decisiones en tiempo real (Elkefi & Asan, 2022, p. 5). 
+La evidencia de estos casos de éxito respalda la viabilidad de extender estas aproximaciones 
+al contexto de los MCEs, donde la demanda puede aumentar exponencialmente en períodos 
+cortos.
+2.5.2 Indicadores Clave de Rendimiento (KPIs)
+La evaluación de la efectividad de la asignación de recursos en MCEs requiere el 
+seguimiento de indicadores clave de rendimiento que permitan medir el impacto de las 
+decisiones en tiempo real. (Li et al., 2025, p. 4 ) señala que el monitoreo continuo de los 
+signos vitales y otros parámetros fisiológicos a través de dispositivos IoT permite detectar 
+signos tempranos de deterioro y activar alertas para intervenciones oportunas. (Calcaterra 
+et al., 2025, p. 6) añade que los DTs que incorporan actualizaciones de datos en tiempo real 
+producen mejoras sustanciales en indicadores como la precisión diagnóstica y la person -
+alización del tratamiento. (Vallee, 2023, p. 3 ) destaca que la optimización de operaciones 
+clínicas mediante DTs permite analizar flujos de trabajo y asignación de recursos, identifi-
+cando cuellos de botella y áreas de mejora.
+(Elkefi & Asan, 2022, p. 5) identifica que los DTs aplicados a la gestión de sistemas de 
+salud han demostrado mejoras en indicadores como los tiempos de espera, la duración de la 
+estancia y la utilización de recursos. En el contexto de los MCEs, los KPIs críticos incluyen el 
+tiempo hasta el triaje, la tasa de ocupación de camas UCI, la proporción paciente-personal, 
+el tiempo de respuesta a emergencias y la tasa de mortalidad ajustada por gravedad (Li et 
+al., 2025, p. 3). El seguimiento de estos indicadores a través del DT permite a los gestores 
+identificar tendencias y tomar decisiones proactivas para evitar el colapso del sistema.
+
+PAGE 23
+2.6 Desafíos y Oportunidades
+2.6.1 Desafíos Técnicos
+(Rehan & Rehan, 2025, p. 18) identifica múltiples desafíos técnicos para la implementación 
+de DTs en el sector salud. La infraestructura requerida para aplicar la tecnología DT es 
+un desafío continuo que exige redes de sensores sofisticadas, protocolos de comunicación 
+seguros, alta capacidad de cómputo, almacenamiento seguro de datos y técnicas avanzadas 
+de modelado, predicción y simulación (Rehan & Rehan, 2025, p. 18). En el contexto de los 
+DTs societales (SDTs), que son una versión avanzada de los DTs, la infraestructura necesaria 
+es aún mayor para procesar el conocimiento del DT y predecir decisiones relacionadas con 
+infecciones de manera eficiente (Rehan & Rehan, 2025, p. 18). La coexistencia tecnológica 
+es otro desafío, ya que los DTs abarcan numerosas tecnologías que deben coordinarse y 
+colaborar en tiempo real para lograr el objetivo común de la gestión de crisis, requiriendo 
+compatibilidad, coexistencia e interoperabilidad entre múltiples tecnologías (Rehan & 
+Rehan, 2025, p. 18).
+La comunicación y el almacenamiento seguro también representan desafíos críticos. 
+La transmisión de datos de pacientes a través de redes es vulnerable a numerosas amenazas, 
+como escuchas, ataques de hombre en el medio y ataques de denegación de servicio (Rehan 
+& Rehan, 2025, p. 18 ). Los DTs deben implementar mecanismos de seguridad robustos, 
+como cifrado, autenticación, firewalls y sistemas de detección de intrusiones, mientras que 
+el almacenamiento seguro puede garantizarse mediante cifrado en reposo, autenticación, 
+copias de seguridad regulares y gestión de vulnerabilidades (Rehan & Rehan, 2025, p. 18). La 
+eficiencia del rendimiento es indispensable para la comunicación en tiempo real en los DTs, 
+
+PAGE 24
+requiriendo la optimización del uso de recursos (potencia de cómputo, almacenamiento y 
+ancho de banda de red) y la implementación de mecanismos de balanceo de carga para 
+evitar cuellos de botella en el entorno altamente centrado en datos de los DTs (Rehan & 
+Rehan, 2025, p. 18).
+La integración e interoperabilidad de datos es otro desafío fundamental, ya que 
+los DTs dependen de datos limpios y estandarizados para un funcionamiento óptimo. Sin 
+embargo, los datos de salud suelen estar fragmentados en sistemas dispares y provienen 
+de fuentes diversas (sensores, MIoT, tomografías computarizadas, resonancias magnéticas, 
+etc.) (Rehan & Rehan, 2025, p. 18). La naturaleza inconsistente y fragmentada de estos datos 
+dificulta su procesamiento directo, planteando desafíos significativos en los entornos de DT 
+(Rehan & Rehan, 2025, p. 18). La equidad y adaptabilidad dinámica también son preocupa-
+ciones, ya que los DTs se basan en modelos de IA/ML para predicciones futuras, y si estos 
+modelos no se entrenan adecuadamente, no se actualizan regularmente o si los conjuntos 
+de datos carecen de diversidad representativa, pueden producirse sesgos de predicción que 
+afecten la precisión y confiabilidad de las predicciones del DT (Rehan & Rehan, 2025, p. 18).
+2.6.2 Desafíos Humanos y Organizacionales
+(Moyaux et al., 2023, p. 11) enfatiza que un sistema de emergencias es fundamentalmente 
+una organización basada en personas, y que capturar las decisiones y actualizar el PT es 
+mucho más complejo de lo que se ha propuesto, ya que todos los actores tienen un espacio 
+libre para realizar sus tareas y a menudo se debe alcanzar un consenso. Por lo tanto, para 
+definir realmente un DT de un ED, se necesita una captura indirecta de las decisiones y 
+un análisis de la dinámica del sistema que considere la complejidad de las interacciones 
+humanas (Moyaux et al., 2023, p. 11 ). (Vallee, 2023, p. 5 ) añade que la implementación 
+
+PAGE 25
+exitosa de DTs en salud requiere abordar desafíos relacionados con la privacidad de los 
+datos, la interoperabilidad, la calidad de los datos, la ética, la intensidad de recursos, la 
+integración con flujos de trabajo, la validación, la educación, la escalabilidad y los cambios 
+culturales.
+(Calcaterra et al., 2025, p. 6 ) señala que la brecha entre la innovación basada en 
+simulación y la integración en el mundo real es uno de los principales obstáculos para la 
+adopción de DTs en la práctica clínica. Esta brecha se manifiesta en la falta de protocolos 
+de validación estandarizados, tanto para la reproducibilidad técnica como para la seguridad 
+clínica (Calcaterra et al., 2025, p. 6 ). enfatiza la necesidad de incorporar técnicas de IA 
+explicable que permitan a los usuarios finales comprender los factores que influyen en las 
+predicciones, aumentando así la confianza y la adopción. (Li et al., 2025, p. 5 ) destaca que 
+las consideraciones éticas, de privacidad y seguridad plantean barreras significativas para 
+la adopción de DTs en salud, requiriendo un equilibrio cuidadoso entre la innovación y la 
+gobernanza de datos.
+2.6.3 Oportunidades de Investigación
+(Vallee, 2023, p. 5) destaca que el potencial de la tecnología DT en salud es inmenso y que 
+su implementación tiene el potencial de mejorar significativamente los resultados de los 
+pacientes, mejorar la seguridad del paciente e impulsar la innovación en la industria de 
+la salud. (Calcaterra et al., 2025, p. 6 ) propone una hoja de ruta para avanzar en la imple -
+mentación de DTs que incluye cuatro habilitadores clave: mecanismos de preservación 
+de la privacidad, tuberías de validación, interoperabilidad, e infraestructura e integración. 
+Estos habilitadores son fundamentales para superar los desafíos identificados y facilitar la 
+
+PAGE 26
+transición de los DTs desde prototipos de investigación a herramientas prácticas centradas 
+en el paciente (Calcaterra et al., 2025, p. 6).
+(Rehan & Rehan, 2025, p. 20) identifica múltiples direcciones de investigación futura, 
+incluyendo el desarrollo de ecosistemas de DT inteligentes para la optimización de procesos 
+hospitalarios, la mejora de la escalabilidad de los DTs para adaptarse a crecientes requisitos 
+de los usuarios, y el fortalecimiento de los DTs como sistemas de apoyo a la decisión. 
+(Moyaux et al., 2023, p. 11 ) señala que futuras investigaciones deberían centrarse en las 
+otras dimensiones clásicas de un DT: comunicación, modelado de datos, interoperabilidad 
+con los sistemas de información hospitalarios, interfaces humanas, y análisis más cercano 
+de la dinámica de los ED y la estabilidad de las decisiones.
+2.7 Propuesta de Modelo Híbrido ABS-SD
+Sobre la base del marco teórico expuesto, la presente investigación propone un modelo 
+híbrido que integra Agent-Based Simulation y System Dynamics para la optimización 
+en tiempo real de la asignación de recursos hospitalarios durante MCEs. Este modelo se 
+estructura en tres capas principales: la capa física (Physical Twin, PT) que representa 
+el departamento de emergencias real con sus pacientes, personal y equipos; la capa de 
+sincronización que utiliza sensores IoT, registros electrónicos de salud (EHR) y eventos en 
+tiempo real para mantener actualizado el modelo digital; y la capa digital (Digital Twin) que 
+alberga la simulación basada en agentes para el comportamiento individual y la dinámica 
+de sistemas para las tendencias agregadas (Moyaux et al., 2023, p. 6), (Rehan & Rehan, 2025, 
+p. 10).
+El modelo propuesto implementa los tres modos operativos definidos por (Moyaux 
+et al., 2023, p. 5 ): Digital Shadow para el monitoreo continuo del estado del ED, Synchro -
+
+PAGE 27
+nised DT para la predicción en tiempo real del flujo de pacientes y la utilización de recursos, 
+y Exploratory DT para el análisis de escenarios “what-if” en la planificación de respuesta. La 
+sincronización entre el PT y el DT se realiza a través del sistema de información del hospital, 
+utilizando transiciones para actualizar el estado de los agentes digitales y transiciones para 
+simular interacciones y proyecciones futuras (Moyaux et al., 2023, p. 5).
+El flujo de trabajo propuesto comprende seis etapas: (1) recolección de datos desde 
+EHR, sensores IoT y sistemas de gestión hospitalaria; (2) sincronización del modelo digital 
+con eventos del PT; (3) simulación mediante ABS para el comportamiento individual de 
+pacientes y personal, y SD para las dinámicas de sistema; (4) generación de pronósticos de 
+demanda y utilización de recursos; (5) visualización de dashboards con KPIs en tiempo real; 
+y (6) recomendaciones para la asignación de recursos con intervención humana (Moyaux 
+et al., 2023, p. 4), (Li et al., 2025, p. 3). Este enfoque integrador busca cerrar la brecha entre la 
+innovación académica y la práctica clínica, proporcionando una herramienta que pueda ser 
+adoptada por los gestores hospitalarios para mejorar la respuesta ante eventos de víctimas 
+masivas (Calcaterra et al., 2025, p. 6), (Vallee, 2023, p. 5).
+
+PAGE 28
+Bibliography
+Calcaterra, V., Guardamagna, L., Gatti, A., Rossi, V., Patane, P., Marin, L., Vandoni, M., & 
+Zuccotti, G. (2025). Digital twins in healthcare: A systematic review of current appli -
+cations, frameworks, and future directions. Digital Health, 11, 1–14. https://doi.org/10.
+1177/20552076251325859
+Cassidy, R., Singh, N. S., Schiratti, P.-R., Semwanga, A., Binyaruka, P., Sachingongu, N., 
+Chama-Chiliba, C. M., Chalabi, Z., Borghi, J., & Blanchet, K. (2019). Mathematical 
+Modelling for Health Systems Research: A Systematic Review of System Dynamics and 
+Agent-Based Models. BMC Health Services Research , 19, 845. https://doi.org/10.1186/s
+12913-019-4627-7
+Djanatliev, A., & German, R. (2013). Prospective Healthcare Decision-Making by Combined 
+System Dynamics, Discrete-Event and Agent-Based Simulation. Proceedings of the 2013 
+Winter Simulation Conference, 270–281. https://doi.org/10.1109/WSC.2013.6721426
+Djanatliev, A., Kolominsky-Rabas, P., Hofmann, B. M., & German, R. (2012). Hybrid Simula-
+tion with Loosely Coupled System Dynamics and Agent-Based Models for Prospective 
+Health Technology Assessments. Proceedings of the 2012 Winter Simulation Conference, 
+770–781. https://doi.org/10.1109/WSC.2012.6465024
+Elkefi, S., & Asan, O. (2022). Digital Twins for Managing Health Care Systems: Rapid 
+Literature Review. Journal of Medical Internet Research, 24(8), e37641. https://doi.org/10.
+2196/37641
+Florencia, J., Moyaux, T., Trilling, L., Bouleux, G., & Cheutet, V. (2025). Toward Improving 
+Dynamic Resource Scheduling in the Context of Digital Twin of Emergency Depart -
+
+PAGE 29
+ment. IEEE Transactions on Automation Science and Engineering, 22, 7255–7267. https://
+doi.org/10.1109/TASE.2024.3463489
+Harper, A., Mustafee, N., & Viana, J. (2026). Real-time decision-support using simulation 
+(RtS) for operational responsiveness in urgent and emergency care: Bridging the gap 
+between conventional simulation and digital twins. European Journal of Operational 
+Research, 310(1), 1–20. https://doi.org/10.1016/j.ejor.2026.05.032
+Li, H., Zhang, J., Zhang, N., & Zhu, B. (2025). Advancing Emergency Care With Digital 
+Twins. JMIR Aging, 8, e71777. https://doi.org/10.2196/71777
+Li, Y., Mao, C., Huang, K., Wang, H., Yu, Z., Wang, M., & Luo, Y. (2024,). Deep Reinforcement 
+Learning for Efficient and Fair Allocation of Health Care Resources . https://doi.org/10.
+48550/arXiv.2309.08560
+Mehrholassani, M. H., Goudarzi, R., & Akhondzardaini, R. (2025). Applications, Key Vari -
+ables, and Implementation Challenges of System Dynamics in Hospital Performance: A 
+Scoping Review. Journal of Nursing and Midwifery Sciences , 12(3), e161567. https://doi.
+org/10.5812/jnms-161567
+Mesas, F., Taboada, M., Rexachs, D., Epelde, F., Wong, A., & Luque, E. (2025). A Customiz -
+able Agent-Based Simulation Framework for Emergency Departments. Computational 
+Science – ICCS 2025, Lecture Notes in Computer Science, 15906, 46–53. https://doi.org/10.
+1007/978-3-031-97635-3_6
+Moyaux, T., Liu, Y., Bouleux, G., & Cheutet, V. (2023). An Agent-Based Architecture of the 
+Digital Twin for an Emergency Department. Sustainability, 15(4), 3412. https://doi.org/
+10.3390/su15043412
+
+PAGE 30
+Nguyen, L. K. N., Howick, S., & Megiddo, I. (2024). A Framework for Conceptualising Hybrid 
+System Dynamics and Agent-Based Simulation Models. European Journal of Operational 
+Research, 315(3), 1153–1166. https://doi.org/10.1016/j.ejor.2024.01.027
+Penverne, Y., Martinez, C., Cellier, N., Pehlivan, C., Jenvrin, J., Savary, D., Debierre, V., 
+Deciron, F., Bichri, A., Lebastard, Q., Montassier, E., Leclere, B., & Fontanili, F. (2024). 
+A Simulation Based Digital Twin Approach to Assessing the Organization of Response 
+to Emergency Calls. Npj Digital Medicine , 7, 385. https://doi.org/10.1038/s41746-024-
+01392-2
+Rehan, M. W., & Rehan, M. M. (2025). Survey, taxonomy, and emerging paradigms of societal 
+digital twins for public health preparedness. Npj Digital Medicine, 8(520), 1–24. https://
+doi.org/10.1038/s41746-025-01737-5
+Vallee, A. (2023). Digital twin for healthcare systems. Frontiers in Digital Health, 5, 1253050. 
+https://doi.org/10.3389/fdgth.2023.1253050

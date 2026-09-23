@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Laboratorio de simulación de recursos hospitalarios ABS–SD"><title>ABS–SD · Laboratorio de simulación</title><link rel="stylesheet" href="/style.css"><script src="/hospital3d.js" defer></script><script src="/app.js" defer></script></head>
+<body class="embedded-simulator">
+<header><a class="brand" href="/">ABS<span>–</span>SD <small>LABORATORIO</small></a><nav class="top-nav"><a class="tag" href="/operations">Gestión operativa</a><span class="tag">Modelo experimental · Simulación + ML</span></nav></header>
+<div class="workspace">
+<aside><div class="section-label">01 / CONFIGURACIÓN</div><h1>Diseña un escenario</h1>
+<form id="form"><fieldset id="controls">
+<label>Origen de pacientes<select id="population-mode"><option value="generated">Generación sintética</option><option value="cohort">Reproducir cohorte JSON</option></select></label>
+<div id="cohort-controls" hidden>
+<label>Archivo de cohorte<input id="cohort-file" type="file" accept=".json,application/json"></label>
+<button type="button" id="cohort-example" class="secondary">Cargar ejemplo ficticio</button>
+<label>Datos de la cohorte<textarea id="cohort-json" rows="8" spellcheck="false" placeholder="Carga un archivo o utiliza el ejemplo"></textarea></label>
+<p class="hint">Hasta 1.000 pacientes y 240 KB. Solo identificadores numéricos anónimos. Se conservan las llegadas y el trabajo basal: demanda y servicio ×1. El hospital comienza vacío. La semilla no interviene en este modo.</p>
+</div>
+<label>Escenario<select id="scenario"><option value="reference">Referencia</option><option value="surge">Demanda al 150 %</option><option value="double">Demanda al 200 %</option><option value="staff">Personal reducido</option><option value="critical">Recursos críticos reducidos</option></select></label>
+<div class="fields" id="main-fields"></div>
+<h2>Recursos disponibles</h2><div class="fields" id="resource-fields"></div>
+<h2>Regla de atención</h2><label>Política<select id="policy"><option value="priority">Prioridad estricta</option><option value="fifo">FIFO · Orden de llegada</option><option value="tuned">Prioridad con reserva</option><option value="aging">Envejecimiento de prioridad</option></select></label>
+<div class="fields" id="policy-fields"></div>
+<details><summary>Parámetros avanzados</summary><div class="fields" id="advanced-fields"></div></details>
+<label class="check"><input id="compare" type="checkbox" checked> Comparar las cuatro políticas</label>
+<button type="submit" id="run">Ejecutar simulación <span>↗</span></button>
+<p class="hint">Cada comparación usa exactamente la misma población.</p>
+</fieldset></form></aside>
+<main>
+<div class="heading"><div><div class="section-label">02 / RESULTADOS</div><h2>Dinámica hospitalaria</h2><p id="run-info">Configura el escenario y ejecuta el motor.</p></div><button id="export" class="secondary" disabled>Exportar JSON</button></div>
+<section class="panel twin-panel" aria-label="Estado de sincronización del gemelo"><div class="section-label">ESTADO OPERATIVO / SINCRONIZACIÓN</div><p id="twin-status" role="status" aria-live="polite">Preparando recepción local de eventos…</p><div id="twin-counts" class="snapshot"></div><p class="hint">El receptor local persiste eventos, controla duplicados y versiones por entidad. No hay conexión HIS/EHR activa; la fuente se declara en el emisor y aún no se autentica. Los datos recibidos aún no inicializan ni modifican la simulación ABS–SD.</p></section>
+<p id="status" role="status" aria-live="polite">Preparando el escenario de referencia…</p><p id="error" role="alert" hidden></p>
+<p id="population-info" class="hint"></p>
+<div id="results" hidden>
+<section id="metrics" class="metrics" aria-label="Indicadores de la simulación"></section>
+<section class="panel hospital-panel" aria-label="Hospital en tres dimensiones">
+<div class="panel-heading"><div><div class="section-label">VISTA ESPACIAL / 3D</div><h3>El hospital, minuto a minuto</h3><p>Arrastra para girar. Selecciona un paciente para consultar su estado.</p></div><button class="secondary" id="camera-reset">Restablecer cámara</button></div>
+<div class="hospital-stage"><canvas id="hospital" tabindex="0" aria-label="Vista 3D del hospital. Flechas para girar, más y menos para acercar o alejar. Los conteos exactos están debajo."></canvas><div class="scene-key"><span class="badge p0">P0</span><span class="badge p1">P1</span><span class="badge p2">P2</span><span>Cama libre: blanco</span></div></div>
+<div class="playback"><button id="play" type="button">▶ Reproducir</button><button id="rewind" class="secondary" aria-label="Volver al minuto cero">↶ Inicio</button><label for="play-speed">Velocidad<select id="play-speed"><option value="5">5 min/s</option><option value="20" selected>20 min/s</option><option value="60">60 min/s</option></select></label><label class="scene-time" for="scene-time">Minuto <output id="scene-minute">0</output><input id="scene-time" type="range" min="0" max="1" value="0" step="1"></label><button id="zoom-in" class="secondary" aria-label="Acercar cámara">+</button><button id="zoom-out" class="secondary" aria-label="Alejar cámara">−</button></div>
+<div id="scene-counts" class="snapshot"></div><p id="scene-selection" role="status">Selecciona una figura para ver el paciente. La tabla inferior conserva todos los pacientes.</p><p class="hint" id="scene-note">Distribución esquemática; los desplazamientos y las camas individuales no son variables del motor.</p>
+</section>
+<section class="panel evolution"><div class="panel-heading"><div><h3>Evolución de pacientes</h3><p>Personas en cada estado durante la simulación</p></div><div class="legend"><span class="queue">En espera</span><span class="active">En atención</span><span class="finished">Finalizados</span></div></div><div id="chart"></div><label class="timeline">Explorar minuto <output id="time-value"></output><input id="time" type="range" min="0" value="0" step="1"></label><div id="snapshot" class="snapshot"></div></section>
+<div class="two-columns"><section class="panel"><h3>Ocupación media</h3><p>Porcentaje de la capacidad durante el horizonte</p><div id="resources"></div></section><section class="panel"><h3>Atención por prioridad</h3><p>Cobertura de inicio y espera censurada</p><div id="priorities"></div></section></div>
+<section class="panel" id="comparison-panel"><h3>Comparación de políticas</h3><p>Una réplica por política. Una pérdida menor no implica mejores resultados en todos los indicadores.</p><div class="table-wrap"><table><thead><tr><th>Política</th><th>Pérdida ponderada ↓</th><th>Espera P0</th><th>Espera global</th><th>Cobertura P2</th><th>Finalizados</th></tr></thead><tbody id="comparisons"></tbody></table></div><p class="hint" id="comparison-note"></p></section>
+<section class="panel"><div class="panel-heading"><div><h3>Trayectorias individuales</h3><p id="patient-count"></p></div><div class="table-actions"><label class="sr-only" for="filter">Filtrar pacientes por prioridad</label><select id="filter"><option value="all">Todas las prioridades</option><option value="0">P0</option><option value="1">P1</option><option value="2">P2</option></select><button class="secondary" id="csv">Descargar CSV</button></div></div><div class="table-wrap patient-table"><table><thead><tr><th>Paciente</th><th>Prioridad</th><th>Llegada</th><th>Inicio</th><th>Fin</th><th>Espera</th><th>Estado al cierre</th></tr></thead><tbody id="patients"></tbody></table></div></section>
+</div><footer>Motor híbrido de agentes y dinámica de sistemas. Las esperas de pacientes sin atención se censuran al cierre del horizonte.</footer>
+<section class="panel" id="ml-panel" aria-label="Aprendizaje automático con datos reales">
+<div class="section-label">03 / APRENDIZAJE AUTOMÁTICO</div><h2>Explora un perfil de llegada</h2>
+<p>Modelos entrenados con 16.025 visitas de urgencias de <a href="https://www.cdc.gov/nchs/nhamcs/documentation/index.html" target="_blank" rel="noopener">CDC · NHAMCS 2022</a>. El perfil inicial es un ejemplo ficticio.</p>
+<p id="ml-status" role="status">Cargando evaluación del modelo…</p><div id="ml-evaluation" class="table-wrap"></div>
+<form id="ml-form"><fieldset id="ml-controls" disabled><div id="ml-fields" class="fields"></div><button type="submit" id="ml-predict">Calcular predicciones</button></fieldset></form>
+<p class="hint">Triaje NHAMCS: 1 inmediato, 2 emergente, 3 urgente, 4 semiurgente, 5 no urgente. No equivale a las prioridades P0–P2 del simulador. Puedes dejar variables vacías para indicar datos ausentes.</p>
+<div id="ml-output" role="status" aria-live="polite"></div>
+<p class="hint">Uso experimental: datos de EE. UU., sin validación en Perú ni en incidentes de víctimas masivas. La estancia incluye la espera; estas predicciones acompañan la simulación y no modifican sus tiempos de trabajo ni sus decisiones de atención.</p>
+</section>
+</main></div><script src="/ml-ui.js" defer></script><script src="/twin-ui.js" defer></script></body></html>
